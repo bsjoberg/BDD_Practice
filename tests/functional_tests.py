@@ -3,4 +3,5 @@ from selenium import webdriver
 browser = webdriver.Firefox()
 browser.get('http://localhost:8000')
 
-assert 'install' in browser.title
+assert 'install worked' in browser.title
+assert 'django' in browser.page_source
