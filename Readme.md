@@ -9,8 +9,11 @@ Need django, selenium, geckodriver
 ## Running django
 `python manage.py runserver`
 
+## Run all tests
+- `python manage.py test`
+
 ## Running unittests
-- `python manage.py tests`
+- `python manage.py test lists`
 
 ## Running functional tests
 - `rm db.sqlite3`
