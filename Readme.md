@@ -15,4 +15,4 @@ Need django, selenium, geckodriver
 ## Running functional tests
 - `rm db.sqlite3`
 - `python manage.py migrate --noinput`
-- `python tests/functional_tests.py`
+- `python manage.py test functional_tests`
