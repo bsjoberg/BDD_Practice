@@ -15,4 +15,4 @@ def step_impl(context):
 
 @then(u'I get "Hello World" message')
 def step_impl(context):
-    assert context.result == "Hello World"
+    assert context.result == "Hello World", 'Expect {}, got {}'.format("Hello World", context.result)
