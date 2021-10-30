@@ -1,15 +1,18 @@
 from behave import given, when, then
 
+import hello_world
+
+
 @given(u'there is a hello world')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given there is a hello world')
+    pass
 
 
 @when(u'I say hi')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When I say hi')
+    context.result = hello_world.sayhi()
 
 
 @then(u'I get "Hello World" message')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then I get "Hello World" message')
+    assert context.result == "Hello World"
