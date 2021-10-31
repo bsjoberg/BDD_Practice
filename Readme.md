@@ -1,6 +1,6 @@
 This is a repo used while I follow the TDD with Python book
 
-Need django, selenium, geckodriver
+Need django, selenium, geckodriver, behave
 
 ## Geckodriver
 - https://github.com/mozilla/geckodriver/releases
@@ -19,3 +19,7 @@ Need django, selenium, geckodriver
 - `rm db.sqlite3`
 - `python manage.py migrate --noinput`
 - `python manage.py test functional_tests`
+
+## Running behave (BDD Tests)
+Creating a duplicate set of functional tests but using behave's given when then with step definitions
+- `behave`
