@@ -1,11 +1,8 @@
 from behave import given, when, then
+import time
 
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-
-
-def after_all(context):
-    print("after")
 
 
 @given(u'I have django running')
@@ -40,6 +37,7 @@ def step_impl(context):
     # When she hits enter, the page updates, and now the page lists
     # "1: Buy peacock feathers" as an item in a to-do list table
     inputbox.send_keys(Keys.ENTER)
+    time.sleep(1)
 
 
 @then(u'I see "{expected_result}" in the title')
@@ -50,6 +48,10 @@ def step_impl(context, expected_result):
 @then(u'I see the item on my to-do list')
 def step_impl(context):
     table = context.result.find_element(By.ID, 'id_list_table')
-    rows = table.find_elements(By.TAG_NAME, 'tr')
-    assert any(row.text == '1: Buy peacock feathers' for row in rows) == "New to-do item did not appear in table"
-
+    rows = table.find_elements_by_tag_name('tr')
+    found = False
+    for i in range(len(rows)):
+        if rows[i].text == '1: Buy peacock feathers':
+            found = True
+            break
+    assert found
