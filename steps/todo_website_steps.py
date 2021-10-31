@@ -19,4 +19,3 @@ def step_impl(context):
 @then(u'I see "{expected_result}" in the title')
 def step_impl(context, expected_result):
     assert expected_result in context.result.title, f"Expected {expected_result} but got {context.result.title}"
-    context.result.quit()
