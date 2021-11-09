@@ -1,4 +1,4 @@
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -9,7 +9,7 @@ import time
 MAX_WAIT = 10
 
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -67,18 +67,6 @@ class NewVisitorTest(LiveServerTestCase):
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
         self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
 
-        # self.fail('Finish the test!')
-
-        # The page updates again, and now shows both items on her list
-
-        # Edith wonders whether the site will remember her list. Then she sees
-        # that the site has generated a unique URL for her -- there is some
-        # explanatory text to that effect.
-
-        # She visits that URL - her to-do list is still there.
-
-        # Satisfied, she goes back to sleep
-
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Edith starts a new to-do list
         self.browser.get(self.live_server_url)
@@ -89,6 +77,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         # She notices that her list has a unique URL
         edith_list_url = self.browser.current_url
+        print('Edith list url = ', edith_list_url)
         self.assertRegex(edith_list_url, '/lists/.+')
 
         # Now a new user, Francis, comes along to the site.
@@ -114,6 +103,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         # Francis gets his own unique URL
         francis_list_url = self.browser.current_url
+        print('Francis List URL = ', francis_list_url)
         self.assertRegex(francis_list_url, '/lists/.+')
         self.assertNotEqual(francis_list_url, edith_list_url)
 
@@ -128,6 +118,7 @@ class NewVisitorTest(LiveServerTestCase):
         # Edith goes to the home page
         self.browser.get(self.live_server_url)
         self.browser.set_window_size(1024, 768)
+        time.sleep(5)
 
         # She notices the input box is nicely centered
         inputbox = self.browser.find_element(By.ID, 'id_new_item')
