@@ -47,17 +47,12 @@ def step_impl(self):
 
 @when(u'I add an item')
 def step_impl(self):
-    # She is invited to enter a to-do item straight away
     inputbox = self.result.find_element(By.ID, 'id_new_item')
     assert inputbox.get_attribute('placeholder') == 'Enter a to-do item'
 
-    # She types "Buy peacock feathers" into a text box (Edith's hobby
-    # is tying fly-fishing lures)
     inputbox.send_keys('Buy socks')
-
-    # When she hits enter, the page updates, and now the page lists
-    # "1: Buy peacock feathers" as an item in a to-do list table
     inputbox.send_keys(Keys.ENTER)
+
     wait_for_row_in_list_table(self, '1: Buy socks')
 
 
@@ -67,21 +62,19 @@ def step_impl(self):
 
     browser.execute_script('''window.open("http://localhost:8000", "_blank");''')
     browser.find_element(By.TAG_NAME, 'body').send_keys(Keys.CONTROL + Keys.TAB)
-    window_after = browser.window_handles[1]
-    browser.switch_to.window(window_after)
+
+    # Switch to the new tab
+    browser.switch_to.window(browser.window_handles[1])
 
     inputbox = browser.find_element(By.ID, 'id_new_item')
     assert inputbox.get_attribute('placeholder') == 'Enter a to-do item'
 
-    # She types "Buy peacock feathers" into a text box (Edith's hobby
-    # is tying fly-fishing lures)
     inputbox.send_keys('Practice BDD')
 
-    # When she hits enter, the page updates, and now the page lists
-    # "1: Buy peacock feathers" as an item in a to-do list table
     inputbox.send_keys(Keys.ENTER)
     wait_for_row_in_list_table(self, '1: Practice BDD')
 
+    # Switch back to the original tab
     browser.switch_to.window(browser.window_handles[0])
 
 
