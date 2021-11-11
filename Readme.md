@@ -23,3 +23,7 @@ Need django, selenium, geckodriver, behave
 ## Running behave (BDD Tests)
 Creating a duplicate set of functional tests but using behave's given when then with step definitions
 - `behave`
+
+## Misc
+If the local database is removed run the following command to get it working again.
+- `python manage.py migrate --run-syncdb`
